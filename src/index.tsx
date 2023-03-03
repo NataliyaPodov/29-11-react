@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Title } from './Title'
+import Title from './Title'
 
 /* Стрелочная функция */
 
@@ -26,7 +26,8 @@ const Content = () => {
 const App = () => {
     return (
         <>
-            <Title />
+            <Title title="React" year={2023} />
+            <Title title="App" year={2022} />
             <Content />
         </>
     )
