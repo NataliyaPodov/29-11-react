@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import Title from './Title'
 
 /* Стрелочная функция */
 
-const App = () => {
+const Content = () => {
     return (
-        <div>
-            {' '}
-            <h1>Hello App component</h1>
+        <React.Fragment>
             <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Numquam consequuntur voluptatibus vel doloremque placeat
@@ -21,7 +20,15 @@ const App = () => {
                 neque magnam amet culpa suscipit minima delectus necessitatibus
                 eaque deleniti, ipsa nisi. Itaque!
             </p>
-        </div>
+        </React.Fragment>
+    )
+}
+const App = () => {
+    return (
+        <>
+            <Title />
+            <Content />
+        </>
     )
 }
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
