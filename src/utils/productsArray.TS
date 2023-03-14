@@ -57,3 +57,5 @@ const productsArray: Product[] = [
     },
     
 ]
+
+export default productsArray
