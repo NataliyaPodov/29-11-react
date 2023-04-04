@@ -6,19 +6,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { toggleLike } from 'redux/likeReducer'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { removeProductFromCart, changeProductQuantity } from 'redux/cartReducer'
 
 type Props = {
     product: Product
     productCount: number
-    removeProductFromCart: (id: number) => void
-    changeProductQuantity: (id: number, count: number) => void
+    removeProductFromCart?: (id: number) => void
+    changeProductQuantity?: (id: number, count: number) => void
 }
-const CartProductListItemExtended = ({
-    product,
-    productCount,
-    removeProductFromCart,
-    changeProductQuantity,
-}: Props) => {
+const CartProductListItemExtended = ({ product, productCount }: Props) => {
     const isLiked = useAppSelector((state) => state.productsLike[product.id])
     const dispatch = useAppDispatch()
     return (
@@ -41,20 +37,29 @@ const CartProductListItemExtended = ({
                         count={productCount}
                         onDecrement={() =>
                             productCount === 1
-                                ? removeProductFromCart(product.id)
-                                : changeProductQuantity(
-                                      product.id,
-                                      productCount - 1
+                                ? dispatch(removeProductFromCart(product.id))
+                                : dispatch(
+                                      changeProductQuantity({
+                                          id: product.id,
+                                          count: productCount - 1,
+                                      })
                                   )
                         }
                         onIncrement={() =>
-                            changeProductQuantity(product.id, productCount + 1)
+                            dispatch(
+                                changeProductQuantity({
+                                    id: product.id,
+                                    count: productCount + 1,
+                                })
+                            )
                         }
                         minCount={0}
                     />
                     <Button
                         variant="outlined"
-                        onClick={() => removeProductFromCart(product.id)}
+                        onClick={() =>
+                            dispatch(removeProductFromCart(product.id))
+                        }
                     >
                         <DeleteIcon />
                     </Button>
