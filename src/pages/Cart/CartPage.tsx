@@ -6,11 +6,8 @@ import Title from 'components/Title/Title'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from 'redux/hooks'
 
-type Props = {
-    removeProductFromCart: (id: number) => void
-    changeProductQuantity: (id: number, count: number) => void
-}
-const CartPage = ({ removeProductFromCart, changeProductQuantity }: Props) => {
+type Props = {}
+const CartPage = (props: Props) => {
     const productsInCart = useAppSelector((state) => state.productsInCart)
     return (
         <>
@@ -25,8 +22,6 @@ const CartPage = ({ removeProductFromCart, changeProductQuantity }: Props) => {
                 <CartProductList
                     productsInCart={productsInCart}
                     CartItem={CartProductListItemExtended}
-                    removeProductFromCart={removeProductFromCart}
-                    changeProductQuantity={changeProductQuantity}
                 />
             </Grid>
             <CartTotal productsInCart={productsInCart} />
